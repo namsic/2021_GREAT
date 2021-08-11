@@ -1,1 +1,1 @@
-from great._env import numberGame
+from great._env.number_game import NumberGame

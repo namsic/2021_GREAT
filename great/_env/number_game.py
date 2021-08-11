@@ -2,7 +2,7 @@ import gym
 from gym import error, spaces
 
 class NumberGame(gym.Env):
-    metadata = {'render.modes": ["human"]}
+    metadata = {'render.modes": ["human"]'}
     def __init__(self):
         self.action_space = spaces.Discrete(2)
 
@@ -45,10 +45,13 @@ class NumberGame(gym.Env):
         for i in range(-12, 13):
             if i == self.state['current']:
                 print('O', end='')
+            elif abs(i) == 0:
+                print('-', end='')
             elif abs(i) == 10:
                 print('X', end='')
             else:
                 print('+', end='')
+        print()
 
 
     def get_distance(self):
