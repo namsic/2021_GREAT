@@ -20,9 +20,16 @@ class NumberGame(gym.Env):
 
 
     def step(self, action):
+        # input: action
+        # 0 : decrement(-1)
+        # 1 : increment(+1)
+        #
+        # ouput: observation, reward, done
+
         remaining_distance = min(self.state['distance'])
 
         amount = 1 if action else -1
+
         self.state['current'] += amount
         self.state['distance'] = self.get_distance()
 
@@ -42,6 +49,12 @@ class NumberGame(gym.Env):
 
 
     def render(self):
+        # example output:
+        # ++X+++++++++O+++++++++X++
+        # X : goal(10, -10)
+        # O : current number
+        # - : start(0)
+
         for i in range(-12, 13):
             if i == self.state['current']:
                 print('O', end='')
@@ -55,6 +68,8 @@ class NumberGame(gym.Env):
 
 
     def get_distance(self):
+        # calculate distance to both targets
+
         distance = (
             abs(-10 - self.state['current']), 
             abs(10 - self.state['current'])
