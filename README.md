@@ -3,4 +3,7 @@
 - Agent directory `great/_agent/`
 
 ## Captures
-![screen01](./image/screen01.png)
+- Maximum iterations of each episode == 200
+- The reward decreases at every step
+- The image is the result of the random agent.
+![screen02](./image/screen02.png)

@@ -1,30 +1,55 @@
 import gym
 
-class RandomAgent(object):
+import random
+
+
+class DQNAgent(object):
+
+
     def __init__(self, action_space):
         self.action_space = action_space
+        self.epsilon = 0.05
 
 
-    def act(self, observation, reward, done):
+    def random_act(self, observation):
         return self.action_space.sample()
+
+
+    def greedy_act(self, observation):
+        pass
+
+
+    def act(self, observation, epsilon):
+        e = random.random()
+        if e > self.epsilon:
+            action = self.random_act(observation)
+        else:
+            action = self.greedy_act(observation)
+        return action
 
 
 if __name__ == '__main__':
     env = gym.make('great:numbergame-v0')
-    agent = RandomAgent(env.action_space)
+    agent = DQNAgent(env.action_space)
 
-    repeat = 100
-    reward = 0
-    done = False
+    episode_count = 10
+    iteration = 200
 
-    ob = env.reset()
-    env.render()
-    for i in range(repeat):
-        print(i+1)
-        action = agent.act(ob, reward, done)
-        ob, reward, done = env.step(action)
+    for ep in range(episode_count):
+        print('- Episode', ep+1)
+
+        ob = env.reset()
+        cumulative_reward = 0
+        done = False
+        for i in range(iteration):
+            action = agent.random_act(ob)
+            ob, reward, done = env.step(action)
+            cumulative_reward += reward
+            if done:
+                break
+
         env.render()
-        if done:
-            break
-    print('done :', done)
-    print(ob)
+        print('Success:', done)
+        print('State  :', ob)
+        print('Reward :', cumulative_reward)
+        print()
