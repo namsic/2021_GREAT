@@ -12,7 +12,7 @@ class NumberGame(gym.Env):
     def reset(self):
         # Initializes self.state and returns initial observation
 
-        self.state = 0
+        self.state = [0]
         return self.state
 
 
@@ -27,11 +27,11 @@ class NumberGame(gym.Env):
         '''
 
 
-        self.state += action - 1
+        self.state[0] += action - 1
 
         done = bool(
-            self.state >= 10 or 
-            self.state <= -10 
+            self.state[0] >= 10 or 
+            self.state[0] <= -10 
         )
 
         # The reward decreases with every step because the goal is to reach the destination quickly
@@ -51,7 +51,7 @@ class NumberGame(gym.Env):
 
         print('[', end='')
         for i in range(-12, 13):
-            if i == self.state:
+            if i == self.state[0]:
                 print('O', end='')
             elif abs(i) == 0 or abs(i) == 10:
                 print('+', end='')
