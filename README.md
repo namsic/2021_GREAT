@@ -9,6 +9,8 @@
 
 ## Captures
 ### Random Agent
-- Maximum iterations of each episode == 200
+- Maximum iterations of each episode == 30
 - The reward decreases at every step
-![screen02](./image/screen02.png)
+![randomAgent](./image/random01.png)
+### DQN Agent
+![dqnAgent](./image/dqn01.png)
